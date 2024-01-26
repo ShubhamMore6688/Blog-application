@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blogapp-deployment
+  namespace: blogapp
+  labels:
+    app: blog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      namespace: blogapp
+      labels:
+        app: blog
+    spec:
+      containers:
+        - name: blogapp
+          image: 
+          ports:
+            - containerPort: 8000
