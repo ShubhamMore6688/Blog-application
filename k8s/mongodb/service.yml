@@ -1,14 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo-svc
   namespace: blogapp
-  labels:
-    app: blog
+  name: mongodb-svc
 spec:
-  seletor:
+  selector:
     app: blog
   ports:
-    - port: 27017
-      targetPort: 27017
-  type: ClusterIP
+  - name: mongodb-svc
+    protocol: TCP
+    port: 27017
+    targetPort: 27017 
