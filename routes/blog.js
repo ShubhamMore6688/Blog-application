@@ -27,13 +27,20 @@ router.get("/add-new", (req,res)=>{
 router.get("/:id", async(req,res)=>{
   const blog = await Blog.findById(req.params.id).populate("createdBy");
   const blogComment = await Comment.find({blogId: req.params.id}).populate("createdBy");
-  console.log(blogComment);
+ 
   
   return res.render('blog',{
     user: req.user,
     blog,
     blogComment
   });
+})
+
+router.get("/delete/:id", async(req,res)=>{
+  const blog = await Blog.findById(req.params.id);
+  await blog.deleteOne();
+  console.log("The blog is deleted");
+  return res.redirect('/')
 })
 
 router.post("/", upload.single("coverImageURL"),  async (req,res)=>{
